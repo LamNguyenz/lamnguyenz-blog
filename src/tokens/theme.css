@@ -1,0 +1,9 @@
+[data-theme="light"] {
+  --page-background: var(--static-white);
+  --color-text: var(--function-neutral-100);
+}
+
+[data-theme="dark"] {
+  --page-background: var(--function-neutral-200);
+  --color-text: var(--static-white-light);
+}

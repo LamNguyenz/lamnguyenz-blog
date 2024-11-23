@@ -1,0 +1,20 @@
+:root {
+	--base-font-size: 16px;
+	
+	/* FONT SCALE */
+  --font-size--2: clamp(0.4924rem, 0.4285rem + 0.3198vw, 0.6331rem);
+  --font-size--1: clamp(0.6564rem, 0.5712rem + 0.4262vw, 0.844rem);
+  --font-size-0: clamp(0.875rem, 0.7614rem + 0.5682vw, 1.125rem);
+  --font-size-1: clamp(1.1664rem, 1.0149rem + 0.7574vw, 1.4996rem);
+  --font-size-2: clamp(1.5548rem, 1.3529rem + 1.0096vw, 1.999rem);
+  --font-size-3: clamp(2.0725rem, 1.8034rem + 1.3458vw, 2.6647rem);
+
+	/* FONT FAMILY */
+	--font: 'Roboto';
+	--font-system: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+		'Segoe UI Symbol', 'Noto Color Emoji';
+	--font-system-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+		'Courier New', monospace;
+	--base-font: var(--font, var(--font-system)), var(--font-system);
+}
