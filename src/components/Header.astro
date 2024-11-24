@@ -1,11 +1,12 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
-import { SITE_TITLE } from "../consts";
 ---
 
 <header>
-  <nav class="h-8 flex gap-2">
-    <h2><a href="/">{SITE_TITLE}</a></h2>
+  <nav class="content-container py-4 flex gap-4 items-center">
+    <a href="/">
+      <img class="w-8 h-8" src="/logo.svg" alt="Logo" />
+    </a>
     <div class="flex gap-2">
       <HeaderLink href="/">Home</HeaderLink>
       <HeaderLink href="/blog">Blog</HeaderLink>
@@ -13,3 +14,5 @@ import { SITE_TITLE } from "../consts";
     </div>
   </nav>
 </header>
+
+<style></style>
