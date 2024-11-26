@@ -2,7 +2,7 @@
 import HeaderLink from "./HeaderLink.astro";
 ---
 
-<header>
+<header id="header">
   <nav class="content-container py-4 flex gap-4 items-center">
     <a href="/">
       <img class="w-8 h-8" src="/logo.svg" alt="Logo" />
@@ -15,4 +15,47 @@ import HeaderLink from "./HeaderLink.astro";
   </nav>
 </header>
 
-<style></style>
+<script>
+  const header = document.getElementById("header");
+
+  if (header) {
+    window.addEventListener("scroll", () => {
+      const headerHeight = getComputedStyle(
+        document.documentElement
+      ).getPropertyValue("--header-height");
+
+      if (window.scrollY > parseInt(headerHeight)) {
+        header.classList.add("sticky");
+        document.body.style.paddingTop = headerHeight;
+      } else {
+        header.classList.remove("sticky"); 
+        document.body.style.paddingTop = "0px";
+      }
+    });
+  }
+</script>
+
+<style>
+  #header {
+    height: var(--header-height);
+  }
+  #header.sticky {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 100;
+    background-color: rgba(var(--page-background), 0.8);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+
+    background-image: radial-gradient(
+      transparent 1px,
+      var(--page-background) 1px
+    );
+    background-size: 4px 4px;
+    mask: linear-gradient(
+      to bottom,
+      var(--function-neutral-100) 70%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+</style>
