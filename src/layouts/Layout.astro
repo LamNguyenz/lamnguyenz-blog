@@ -2,19 +2,35 @@
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
-import { style } from "@/settings/config";
+import ThemeInit from "../components/ThemeInit.astro";
+
+interface Props {
+  title: string;
+  description: string;
+}
 
 const { title, description } = Astro.props;
 ---
 
-<html lang="en" data-theme={style.theme} data-neutral={style.neutral}>
+<html lang="en">
   <head>
+    <ThemeInit />
     <BaseHead title={title} description={description} />
   </head>
-
-  <body class="bg-page-background">
+  <body class="bg-page-background min-h-screen grid grid-rows-[auto_1fr_auto]">
     <Header />
-    <slot />
+    <main class="content-container">
+      <slot />
+    </main>
     <Footer />
   </body>
 </html>
+
+<script>
+  import { styleStore } from "@/stores/styleStore";
+
+  styleStore.subscribe(({ theme, neutral }) => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.dataset.neutral = neutral;
+  });
+</script>

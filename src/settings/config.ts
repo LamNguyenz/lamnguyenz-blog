@@ -1,14 +1,32 @@
-const style = {
-  theme: "dark", // dark | light
-  neutral: "gray", // sand | gray | slate
-  brand: "cyan", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
-  accent: "indigo", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
-  solid: "contrast", // color | contrast
-  solidStyle: "flat", // flat | plastic
-  border: "playful", // rounded | playful | conservative
-  surface: "translucent", // filled | translucent
-  transition: "all", // all | micro | macro
-  scaling: "100", // 90 | 95 | 100 | 105 | 110
-};
+// Define the type for better TypeScript support
+type ColorOption =
+  | "blue"
+  | "indigo"
+  | "violet"
+  | "magenta"
+  | "pink"
+  | "red"
+  | "orange"
+  | "yellow"
+  | "moss"
+  | "green"
+  | "emerald"
+  | "aqua"
+  | "cyan";
 
-export { style };
+type NeutralOption = "sand" | "gray" | "slate";
+export type ThemeOption = "dark" | "light" | "auto";
+
+export interface StyleConfig {
+  theme: ThemeOption;
+  neutral: NeutralOption;
+  primary: ColorOption;
+  secondary: ColorOption;
+}
+
+export const style: StyleConfig = {
+  theme: "dark",
+  neutral: "sand",
+  primary: "red",
+  secondary: "blue",
+};

@@ -1,15 +1,101 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
-import { SITE_TITLE } from "../consts";
+import ThemeSelect from "./ThemeSelect.astro";
 ---
 
-<header>
-  <nav class="h-8 flex gap-2">
-    <h2><a href="/">{SITE_TITLE}</a></h2>
-    <div class="flex gap-2">
-      <HeaderLink href="/">Home</HeaderLink>
-      <HeaderLink href="/blog">Blog</HeaderLink>
-      <HeaderLink href="/about">About</HeaderLink>
+<header id="header" class="content-center">
+  <div class="blur-background"></div>
+  <nav class="content-container flex gap-4 justify-between relative">
+    <div class="flex gap-4 items-center">
+      <a href="/">
+        <img class="w-8 h-8" src="/logo.svg" alt="Logo" />
+      </a>
+      <div class="flex gap-2">
+        <HeaderLink href="/">Home</HeaderLink>
+        <HeaderLink href="/blog">Blog</HeaderLink>
+        <HeaderLink href="/about">About</HeaderLink>
+      </div>
+    </div>
+    <div class="inline-flex gap-2 items-center">
+      <ThemeSelect />
     </div>
   </nav>
 </header>
+
+<script>
+  const header = document.getElementById("header");
+  const headerHeight = () => 
+    getComputedStyle(document.documentElement).getPropertyValue("--header-height");
+
+  if (header) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > parseInt(headerHeight())) {
+        header.classList.add("sticky");
+        document.body.style.paddingTop = headerHeight();
+      } else {
+        header.classList.remove("sticky");
+        document.body.style.paddingTop = "0px";
+      }
+    });
+  }
+</script>
+
+<style>
+  /* Base header styles */
+  #header {
+    height: var(--header-height);
+    position: relative;
+  }
+
+  /* Sticky state */
+  #header.sticky {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 100;
+  }
+
+  /* Blur background effect */
+  .blur-background {
+    --blur-extend: 500px;
+    --blur-cutoff: calc(100% - var(--blur-extend));
+    
+    position: absolute;
+    inset: 0;
+    bottom: calc(var(--blur-extend) * -1);
+    
+    /* Gradient mask for fade out */
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0,
+      #000 var(--blur-cutoff),
+      transparent var(--blur-cutoff)
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0,
+      #000 var(--blur-cutoff),
+      transparent var(--blur-cutoff)
+    );
+    
+    /* Blur effect */
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  /* Background overlay */
+  .blur-background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--page-background);
+    opacity: 0.75;
+  }
+
+  /* Hide blur when not sticky */
+  #header:not(.sticky) .blur-background {
+    opacity: 0;
+  }
+</style>
