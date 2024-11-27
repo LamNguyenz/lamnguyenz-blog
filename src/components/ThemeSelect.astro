@@ -1,0 +1,45 @@
+---
+import Select from "@/components/Select.astro";
+import { styleStore } from "@/stores/styleStore";
+
+// Get the initial theme from the store
+const initialTheme = styleStore.get().theme;
+---
+
+<theme-select>
+  <Select
+    label="Select theme"
+    value={initialTheme}
+    options={[
+      { label: "Light", value: "light", selected: initialTheme === "light" },
+      { label: "Dark", value: "dark", selected: initialTheme === "dark" },
+      { label: "Auto", value: "auto", selected: initialTheme === "auto" },
+    ]}
+    width="6.25em"
+  />
+</theme-select>
+
+<script>
+  import { updateStyle, initializeStore, styleStore } from "@/stores/styleStore";
+  import { type ThemeOption } from "@/settings/config";
+
+  initializeStore();
+
+  // React to changes in system color scheme.
+  matchMedia(`(prefers-color-scheme: light)`).addEventListener("change", () => {
+    if (styleStore.get().theme === "auto") updateStyle({ theme: "auto" });
+  });
+
+  class ThemeSelect extends HTMLElement {
+    constructor() {
+      super();
+
+      this.querySelector("select")?.addEventListener("change", (e) => {
+        updateStyle({
+          theme: (e.target as HTMLSelectElement).value as ThemeOption,
+        });
+      });
+    }
+  }
+  customElements.define("theme-select", ThemeSelect);
+</script>

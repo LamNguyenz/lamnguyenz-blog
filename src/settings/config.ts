@@ -15,7 +15,7 @@ type ColorOption =
   | "cyan";
 
 type NeutralOption = "sand" | "gray" | "slate";
-type ThemeOption = "dark" | "light";
+export type ThemeOption = "dark" | "light" | "auto";
 
 export interface StyleConfig {
   theme: ThemeOption;
@@ -26,7 +26,7 @@ export interface StyleConfig {
 
 export const style: StyleConfig = {
   theme: "dark",
-  neutral: "gray",
+  neutral: "sand",
   primary: "red",
   secondary: "blue",
 };

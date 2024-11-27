@@ -1,5 +1,5 @@
-import { atom } from "nanostores";
 import { type StyleConfig, style } from "@/settings/config";
+import { atom } from "nanostores";
 
 // Create the store with initial values
 export const styleStore = atom<StyleConfig>(style);
@@ -12,13 +12,22 @@ export const updateStyle = (updates: Partial<StyleConfig>) => {
 // Optional: Add persistence
 export const initializeStore = () => {
   // Load from localStorage if available
-  const saved = localStorage.getItem("style-config");
-  if (saved) {
-    styleStore.set(JSON.parse(saved));
+  const styleConfig =
+    (typeof localStorage !== "undefined" && localStorage.getItem("style-config")) ||
+    "{}";
+  const config = JSON.parse(styleConfig);
+
+  let theme = config?.theme || styleStore.get().theme;
+  if (theme === "auto") {
+    theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
   }
+  updateStyle({ ...config, theme });
 
   // Save to localStorage when updated
   styleStore.listen((value) => {
-    localStorage.setItem("style-config", JSON.stringify(value));
+    typeof localStorage !== "undefined" &&
+      localStorage.setItem("style-config", JSON.stringify(value));
   });
 };
