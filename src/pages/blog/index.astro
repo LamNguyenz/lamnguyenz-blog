@@ -13,10 +13,12 @@ const posts = (await getCollection("blog")).sort(
     <div class="flex flex-col gap-4">
       {
         posts.map((post) => (
-          <article>
-            <h2>{post.data.title}</h2>
-            <p>{post.data.description}</p>
-          </article>
+          <a href={`/blog/${post.slug}/`}>
+            <article>
+              <h2>{post.data.title}</h2>
+              <p>{post.data.description}</p>
+            </article>
+          </a>
         ))
       }
     </div>

@@ -18,7 +18,7 @@ export const initializeStore = () => {
   const config = JSON.parse(styleConfig);
 
   let theme = config?.theme || styleStore.get().theme;
-  if (theme === "auto") {
+  if (theme === "auto" || !theme) {
     theme = window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";

@@ -2,7 +2,6 @@
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
-import ThemeInit from "../components/ThemeInit.astro";
 
 interface Props {
   title: string;
@@ -14,10 +13,10 @@ const { title, description } = Astro.props;
 
 <html lang="en">
   <head>
-    <ThemeInit />
     <BaseHead title={title} description={description} />
   </head>
-  <body class="bg-page-background min-h-screen grid grid-rows-[auto_1fr_auto]">
+  <body class="min-h-screen grid grid-rows-[auto_1fr_auto]">
+    <div id="gradient-background"></div>
     <Header />
     <main class="content-container">
       <slot />
@@ -34,3 +33,65 @@ const { title, description } = Astro.props;
     document.documentElement.dataset.neutral = neutral;
   });
 </script>
+
+<script>
+  const gradientBackground = document.getElementById("gradient-background");
+
+  let currentX = 50;
+  let currentY = 50;
+  let targetX = 50;
+  let targetY = 50;
+
+  const lerp = (start: number, end: number, factor: number) => {
+    return start + (end - start) * factor;
+  };
+
+  window.addEventListener("mousemove", (e) => {
+    if (!gradientBackground) return;
+
+    targetX = (e.clientX / window.innerWidth) * 100;
+    targetY = (e.clientY / window.innerHeight) * 100;
+  });
+
+  const animate = () => {
+    if (!gradientBackground) return;
+
+    currentX = lerp(currentX, targetX, 0.1);
+    currentY = lerp(currentY, targetY, 0.1);
+
+    gradientBackground.style.setProperty("--mouse-x", `${currentX}%`);
+    gradientBackground.style.setProperty("--mouse-y", `${currentY}%`);
+
+    requestAnimationFrame(animate);
+  };
+
+  animate();
+</script>
+
+<style>
+  #gradient-background {
+    --accent-rgb: 153, 179, 255;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    background: radial-gradient(
+      600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(var(--accent-rgb), 0.02),
+      transparent 70%
+    );
+    will-change: background;
+    mix-blend-mode: screen;
+  }
+  @media (max-width: 1024px) {
+    #gradient-background {
+      display: none;
+    }
+  }
+  [data-theme="light"] #gradient-background {
+    display: none;
+  }
+</style>

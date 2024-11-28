@@ -1,7 +1,6 @@
 html {
   font-size: var(--base-font-size);
   font-family: var(--base-font);
-  color: var(--color-text);
 }
 
 h1 {
@@ -15,6 +14,14 @@ h2 {
 
 h3 {
   font-size: var(--font-size-1);
+}
+
+h4 {
+  font-size: var(--font-size-0);
+}
+
+h5 {
+  font-size: var(--font-size--1);
 }
 
 p,

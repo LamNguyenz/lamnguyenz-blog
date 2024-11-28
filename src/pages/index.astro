@@ -4,4 +4,41 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout title="Home" description="Home Page">
   <h1>Lamz's blog</h1>
+
+  <br />
+  <br />
+
+  <div class="main-grid gap-10">
+    <!-- Article List -->
+    <section class="article">
+      <h2>Article List</h2>
+      <button class="btn btn-primary">Test Button</button>
+    </section>
+
+    <!-- Tags -->
+    <section class="tags">
+      <h2>Tags</h2>
+    </section>
+  </div>
 </Layout>
+
+<style>
+  .main-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "article tags"
+      "article most-liked";
+  }
+
+  .article {
+    grid-area: article;
+  }
+  .tags {
+    grid-area: tags;
+  }
+  .most-liked {
+    grid-area: most-liked;
+  }
+</style>

@@ -1,9 +1,5 @@
 @import "tailwindcss";
-
-@theme {
-  --color-page-background: var(--page-background);
-}
-
+@plugin "daisyui";
 @layer components {
   .content-container {
     width: min(var(--content-width), 100% - 4rem);
