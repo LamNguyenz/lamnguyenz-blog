@@ -26,11 +26,10 @@ const { title, description } = Astro.props;
 </html>
 
 <script>
-  import { styleStore } from "@/stores/styleStore";
+  import { configStore } from "@/stores/configStore";
 
-  styleStore.subscribe(({ theme, neutral }) => {
+  configStore.subscribe(({ theme }) => {
     document.documentElement.dataset.theme = theme;
-    document.documentElement.dataset.neutral = neutral;
   });
 </script>
 

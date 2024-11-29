@@ -1,7 +1,0 @@
-[data-theme="light"] {
-  background-color: var(--static-white);
-}
-
-[data-theme="dark"] {
-  background-color: var(--scheme-gray-200);
-}
