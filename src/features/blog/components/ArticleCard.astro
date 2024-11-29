@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, description, pubDate, heroImage } = post.data;
+const { title, description, pubDate } = post.data;
 
 const formattedDate = pubDate.toLocaleDateString("en-US", {
   year: "numeric",
