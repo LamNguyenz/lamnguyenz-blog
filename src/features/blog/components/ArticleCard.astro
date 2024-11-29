@@ -1,0 +1,58 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, heroImage } = post.data;
+
+const formattedDate = pubDate.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<article class="card card-side bg-base-200 prose-sm cursor-pointer">
+  <div class="card-body">
+    <h3 class="not-prose text-primary">{title}</h3>
+    <p class="text-sm not-prose">{formattedDate}</p>
+    <p>{description}</p>
+  </div>
+  <div class="p-4 shrink-0 flex items-center justify-center">
+    <figure class="not-prose">
+      <Image
+        class="rounded-xl"
+        width={100}
+        height={100}
+        src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
+        alt="Movie"
+      />
+    </figure>
+  </div>
+</article>
+
+<style>
+  article {
+    border-radius: 1rem;
+    box-shadow:
+      0 1px 1px hsl(0deg 0% 0% / 0.075),
+      0 2px 2px hsl(0deg 0% 0% / 0.075),
+      0 4px 4px hsl(0deg 0% 0% / 0.075),
+      0 8px 8px hsl(0deg 0% 0% / 0.075),
+      0 16px 16px hsl(0deg 0% 0% / 0.075);
+  }
+  figure {
+    width: clamp(50px, calc(100vw / 325 * 50), 100px);
+  }
+  .card-body {
+    padding: calc(var(--spacing) * 4);
+  }
+
+  p {
+    font-size: 0.875rem;
+  }
+</style>

@@ -1,7 +1,7 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
+import BaseHead from "@/components/layout/BaseHead.astro";
+import Footer from "@/components/layout/Footer.astro";
+import Header from "@/components/layout/Header.astro";
 
 interface Props {
   title: string;
@@ -69,7 +69,6 @@ const { title, description } = Astro.props;
 
 <style>
   #gradient-background {
-    --accent-rgb: 153, 179, 255;
     position: fixed;
     top: 0;
     left: 0;
@@ -77,20 +76,35 @@ const { title, description } = Astro.props;
     height: 100%;
     pointer-events: none;
     z-index: -1;
-    background: radial-gradient(
+    background-image: 
+      radial-gradient(
+        2px 2px at 50% 50%,
+        var(--color-primary) 50%,
+        transparent 50%
+      );
+    background-size: 24px 24px;
+    background-position: 0 0;
+    -webkit-mask-image: radial-gradient(
       600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(var(--accent-rgb), 0.02),
+      rgba(0, 0, 0, 1),
       transparent 70%
     );
-    will-change: background;
-    mix-blend-mode: screen;
+    mask-image: radial-gradient(
+      600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(0, 0, 0, 1),
+      transparent 70%
+    );
+    will-change: mask-image, -webkit-mask-image;
+    opacity: 0.5;
   }
+
+  [data-theme="dark"] #gradient-background {
+    opacity: 0.5;
+  }
+
   @media (max-width: 1024px) {
     #gradient-background {
       display: none;
     }
-  }
-  [data-theme="light"] #gradient-background {
-    display: none;
   }
 </style>
