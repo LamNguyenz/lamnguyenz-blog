@@ -1,6 +1,6 @@
 ---
-import "../tokens/index.css";
-import "../styles/index.css";
+import "@/tokens/index.css";
+import "@/styles/index.css";
 
 interface Props {
   title: string;
@@ -37,6 +37,13 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 <link
   rel="preload"
   href="/fonts/Poppins-Medium.ttf"
+  as="font"
+  type="font/ttf"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/Poppins-Bold.ttf"
   as="font"
   type="font/ttf"
   crossorigin

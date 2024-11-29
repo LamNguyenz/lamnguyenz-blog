@@ -1,7 +1,93 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ArticleList from "@/features/blog/components/ArticleList.astro";
 ---
 
 <Layout title="Home" description="Home Page">
   <h1>Lamz's blog</h1>
+
+  <br />
+  <br />
+
+  <div class="main-grid gap-10">
+    <!-- Article List -->
+    <section class="article prose">
+      <h2>Article List</h2>
+      <ArticleList />
+    </section>
+
+    <!-- Tags -->
+    <section class="tags prose">
+      <h2>Tags</h2>
+    </section>
+  </div>
 </Layout>
+
+<style>
+  h1 {
+    position: relative;
+    display: inline-block;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    background-image: linear-gradient(
+      90deg,
+      oklch(0.748 0.26 342.55) 4%,
+      oklch(0.7328 0.2405 2.36499) 22%,
+      oklch(0.6569 0.196 275.75) 45%,
+      oklch(0.701 0.1815 229.68) 67%,
+      oklch(0.7451 0.167 183.61) 100.2%
+    );
+  }
+  h1::before {
+    content: "Lam'z blog";
+    position: absolute;
+    inset: 0;
+    transform: translateZ(0);
+    background-clip: text;
+    filter: blur(25px);
+    background-image: linear-gradient(
+      90deg,
+      oklch(0.748 0.26 342.55) 4%,
+      oklch(0.7328 0.2405 2.36499) 22%,
+      oklch(0.6569 0.196 275.75) 45%,
+      oklch(0.701 0.1815 229.68) 67%,
+      oklch(0.7451 0.167 183.61) 100.2%
+    );
+    -webkit-text-fill-color: transparent;
+  }
+
+  .main-grid {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "article tags"
+      "article most-liked";
+  }
+
+  @media (max-width: 48rem) {
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      grid-template-areas:
+        "article"
+        "tags"
+        "most-liked";
+    }
+  }
+
+  h2 {
+    font-size: 1.125rem;
+  }
+  .article {
+    grid-area: article;
+  }
+  .tags {
+    grid-area: tags;
+  }
+  .most-liked {
+    grid-area: most-liked;
+  }
+</style>

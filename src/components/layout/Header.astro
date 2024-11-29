@@ -1,6 +1,6 @@
 ---
-import HeaderLink from "./HeaderLink.astro";
-import ThemeSelect from "./ThemeSelect.astro";
+import HeaderLink from "@/components/layout/HeaderLink.astro";
+import ThemeSelect from "@/components/layout/ThemeSelect.astro";
 ---
 
 <header id="header" class="content-center">
@@ -8,11 +8,10 @@ import ThemeSelect from "./ThemeSelect.astro";
   <nav class="content-container flex gap-4 justify-between relative">
     <div class="flex gap-4 items-center">
       <a href="/">
-        <img class="w-8 h-8" src="/logo.svg" alt="Logo" />
+        <img class="w-8 h-8 shrink-0" src="/logo.svg" alt="Logo" />
       </a>
       <div class="flex gap-2">
         <HeaderLink href="/">Home</HeaderLink>
-        <HeaderLink href="/blog">Blog</HeaderLink>
         <HeaderLink href="/about">About</HeaderLink>
       </div>
     </div>
@@ -24,7 +23,7 @@ import ThemeSelect from "./ThemeSelect.astro";
 
 <script>
   const header = document.getElementById("header");
-  const headerHeight = () => 
+  const headerHeight = () =>
     getComputedStyle(document.documentElement).getPropertyValue("--header-height");
 
   if (header) {
@@ -58,11 +57,11 @@ import ThemeSelect from "./ThemeSelect.astro";
   .blur-background {
     --blur-extend: 500px;
     --blur-cutoff: calc(100% - var(--blur-extend));
-    
+
     position: absolute;
     inset: 0;
     bottom: calc(var(--blur-extend) * -1);
-    
+
     /* Gradient mask for fade out */
     -webkit-mask-image: linear-gradient(
       to bottom,
@@ -76,11 +75,11 @@ import ThemeSelect from "./ThemeSelect.astro";
       #000 var(--blur-cutoff),
       transparent var(--blur-cutoff)
     );
-    
+
     /* Blur effect */
-    -webkit-backdrop-filter: blur(3px);
-    backdrop-filter: blur(3px);
-    
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+
     pointer-events: none;
     transition: opacity 0.3s;
   }
@@ -91,7 +90,7 @@ import ThemeSelect from "./ThemeSelect.astro";
     position: absolute;
     inset: 0;
     background-color: var(--page-background);
-    opacity: 0.75;
+    opacity: 0.85;
   }
 
   /* Hide blur when not sticky */

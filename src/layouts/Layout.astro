@@ -1,8 +1,7 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import ThemeInit from "../components/ThemeInit.astro";
+import BaseHead from "@/components/layout/BaseHead.astro";
+import Footer from "@/components/layout/Footer.astro";
+import Header from "@/components/layout/Header.astro";
 
 interface Props {
   title: string;
@@ -14,10 +13,10 @@ const { title, description } = Astro.props;
 
 <html lang="en">
   <head>
-    <ThemeInit />
     <BaseHead title={title} description={description} />
   </head>
-  <body class="bg-page-background min-h-screen grid grid-rows-[auto_1fr_auto]">
+  <body class="min-h-screen grid grid-rows-[auto_1fr_auto]">
+    <div id="gradient-background"></div>
     <Header />
     <main class="content-container">
       <slot />
@@ -27,10 +26,85 @@ const { title, description } = Astro.props;
 </html>
 
 <script>
-  import { styleStore } from "@/stores/styleStore";
+  import { configStore } from "@/stores/configStore";
 
-  styleStore.subscribe(({ theme, neutral }) => {
+  configStore.subscribe(({ theme }) => {
     document.documentElement.dataset.theme = theme;
-    document.documentElement.dataset.neutral = neutral;
   });
 </script>
+
+<script>
+  const gradientBackground = document.getElementById("gradient-background");
+
+  let currentX = 50;
+  let currentY = 50;
+  let targetX = 50;
+  let targetY = 50;
+
+  const lerp = (start: number, end: number, factor: number) => {
+    return start + (end - start) * factor;
+  };
+
+  window.addEventListener("mousemove", (e) => {
+    if (!gradientBackground) return;
+
+    targetX = (e.clientX / window.innerWidth) * 100;
+    targetY = (e.clientY / window.innerHeight) * 100;
+  });
+
+  const animate = () => {
+    if (!gradientBackground) return;
+
+    currentX = lerp(currentX, targetX, 0.1);
+    currentY = lerp(currentY, targetY, 0.1);
+
+    gradientBackground.style.setProperty("--mouse-x", `${currentX}%`);
+    gradientBackground.style.setProperty("--mouse-y", `${currentY}%`);
+
+    requestAnimationFrame(animate);
+  };
+
+  animate();
+</script>
+
+<style>
+  #gradient-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    background-image: 
+      radial-gradient(
+        2px 2px at 50% 50%,
+        var(--color-primary) 50%,
+        transparent 50%
+      );
+    background-size: 24px 24px;
+    background-position: 0 0;
+    -webkit-mask-image: radial-gradient(
+      600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(0, 0, 0, 1),
+      transparent 70%
+    );
+    mask-image: radial-gradient(
+      600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(0, 0, 0, 1),
+      transparent 70%
+    );
+    will-change: mask-image, -webkit-mask-image;
+    opacity: 0.5;
+  }
+
+  [data-theme="dark"] #gradient-background {
+    opacity: 0.5;
+  }
+
+  @media (max-width: 1024px) {
+    #gradient-background {
+      display: none;
+    }
+  }
+</style>
