@@ -1,13 +1,11 @@
 ---
+import TagList from "@/features/blog/components/TagList.astro";
 import Layout from "../layouts/Layout.astro";
 import ArticleList from "@/features/blog/components/ArticleList.astro";
 ---
 
 <Layout title="Home" description="Home Page">
-  <h1>Lamz's blog</h1>
-
-  <br />
-  <br />
+  <h1 class="mb-12">Lamz's blog</h1>
 
   <div class="main-grid gap-10">
     <!-- Article List -->
@@ -17,8 +15,9 @@ import ArticleList from "@/features/blog/components/ArticleList.astro";
     </section>
 
     <!-- Tags -->
-    <section class="tags prose">
+    <section class="tags prose prose-a:no-underline">
       <h2>Tags</h2>
+      <TagList />
     </section>
   </div>
 </Layout>

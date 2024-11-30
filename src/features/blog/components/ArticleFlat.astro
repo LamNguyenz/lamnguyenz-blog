@@ -16,8 +16,8 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
 });
 ---
 
-<article class="card card-side bg-base-200 prose-sm cursor-pointer">
-  <div class="card-body">
+<article class="prose-sm cursor-pointer flex">
+  <div class="flex-auto">
     <h3 class="not-prose text-primary">{title}</h3>
     <p class="text-sm not-prose">{formattedDate}</p>
     <p>{description}</p>
@@ -41,20 +41,12 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
 </article>
 
 <style>
-  article {
-    border-radius: 1rem;
-    box-shadow:
-      0 1px 1px hsl(0deg 0% 0% / 0.075),
-      0 2px 2px hsl(0deg 0% 0% / 0.075),
-      0 4px 4px hsl(0deg 0% 0% / 0.075),
-      0 8px 8px hsl(0deg 0% 0% / 0.075),
-      0 16px 16px hsl(0deg 0% 0% / 0.075);
-  }
-  figure {
-    width: clamp(50px, calc(100vw / 325 * 50), 100px);
-  }
   .card-body {
     padding: calc(var(--spacing) * 4);
+  }
+
+  figure {
+    width: clamp(40px, calc(100vw / 320 * 40), 60px);
   }
 
   p {

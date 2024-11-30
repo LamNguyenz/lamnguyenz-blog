@@ -76,12 +76,11 @@ const { title, description } = Astro.props;
     height: 100%;
     pointer-events: none;
     z-index: -1;
-    background-image: 
-      radial-gradient(
-        2px 2px at 50% 50%,
-        var(--color-primary) 50%,
-        transparent 50%
-      );
+    background-image: radial-gradient(
+      2px 2px at 50% 50%,
+      var(--color-primary) 50%,
+      transparent 50%
+    );
     background-size: 24px 24px;
     background-position: 0 0;
     -webkit-mask-image: radial-gradient(
@@ -94,17 +93,13 @@ const { title, description } = Astro.props;
       rgba(0, 0, 0, 1),
       transparent 70%
     );
-    will-change: mask-image, -webkit-mask-image;
-    opacity: 0.5;
+    will-change:
+      mask-image,
+      -webkit-mask-image;
+    opacity: 0.6;
   }
 
   [data-theme="dark"] #gradient-background {
-    opacity: 0.5;
-  }
-
-  @media (max-width: 1024px) {
-    #gradient-background {
-      display: none;
-    }
+    opacity: 0.6;
   }
 </style>

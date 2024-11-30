@@ -1,12 +1,20 @@
 ---
 import { getCollection } from "astro:content";
-import ArticleCard from "./ArticleCard.astro";
+import ArticleFlat from "./ArticleFlat.astro";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
-<div class="flex flex-col gap-4">
-  {posts.map((post) => <ArticleCard post={post} />)}
+<div class="flex flex-col gap-4 divide-y divide-base-content/20">
+  {
+    posts.map((post) => (
+      <div class="prose-a:no-underline">
+        <a class="link" href={`/blog/${post.slug}`}>
+          <ArticleFlat post={post} />
+        </a>
+      </div>
+    ))
+  }
 </div>
