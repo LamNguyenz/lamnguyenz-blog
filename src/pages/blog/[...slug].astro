@@ -16,5 +16,13 @@ const { Content } = await post.render();
 ---
 
 <Layout {...post.data}>
-  <Content />
+  <div class="prose">
+    <Content />
+  </div>
 </Layout>
+
+<style>
+  .prose {
+    max-width: max-content;
+  }
+</style>
