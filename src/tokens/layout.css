@@ -1,4 +1,4 @@
 :root {
-	--content-width: 52rem;
+	--content-width: calc(65ch);
 	--header-height: 4rem;
 }

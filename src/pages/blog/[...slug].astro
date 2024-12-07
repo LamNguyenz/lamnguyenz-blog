@@ -12,12 +12,14 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 ---
 
 <Layout {...post.data}>
-  <div class="prose">
-    <Content />
+  <div class="mx-auto py-8">
+    <article class="prose prose-zinc dark:prose-invert">
+      <Content />
+    </article>
   </div>
 </Layout>
 
