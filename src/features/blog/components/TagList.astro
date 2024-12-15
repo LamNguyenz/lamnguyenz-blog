@@ -1,0 +1,13 @@
+---
+import { getCollection } from "astro:content";
+import TagItem from "./TagItem.astro";
+
+const blogs = await getCollection("blog");
+const tags = [...new Set(blogs.flatMap((blog) => blog.data.tags || []))].sort();
+---
+
+<div class="flex flex-col gap-4">
+  {
+    tags.map((tag) => <TagItem name={tag} href={`/tags/${tag}`} />)
+  }
+</div>

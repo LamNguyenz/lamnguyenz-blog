@@ -3,83 +3,66 @@ import HeaderLink from "@/components/layout/HeaderLink.astro";
 import ThemeSelect from "@/components/layout/ThemeSelect.astro";
 ---
 
-<header id="header" class="content-center">
+<header id="header" class="content-center sticky">
   <div class="blur-background"></div>
-  <nav class="content-container flex gap-4 justify-between relative">
-    <div class="flex gap-4 items-center">
-      <a href="/">
-        <img class="w-8 h-8 shrink-0" src="/logo.svg" alt="Logo" />
-      </a>
-      <div class="flex gap-2">
-        <HeaderLink href="/">Home</HeaderLink>
-        <HeaderLink href="/about">About</HeaderLink>
+  <div class="content-container relative z-10">
+    <nav class="flex gap-4 justify-between">
+      <div class="flex gap-4 items-center">
+        <a href="/">
+          <img class="w-8 h-8 shrink-0" src="/logo.svg" alt="Logo" />
+        </a>
+        <div class="flex gap-2">
+          <HeaderLink href="/">Home</HeaderLink>
+          <!-- <HeaderLink href="/about">About</HeaderLink> -->
+        </div>
       </div>
-    </div>
-    <div class="inline-flex gap-2 items-center">
-      <ThemeSelect />
-    </div>
-  </nav>
+      <div class="inline-flex gap-2 items-center">
+        <ThemeSelect />
+      </div>
+    </nav>
+    <slot name="toc" />
+  </div>
 </header>
 
 <script>
-  const header = document.getElementById("header");
-  const headerHeight = () =>
-    getComputedStyle(document.documentElement).getPropertyValue("--header-height");
+  const addBlur = (header: HTMLElement | null) => {
+    if (!header) return;
 
-  if (header) {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > parseInt(headerHeight())) {
-        header.classList.add("sticky");
-        document.body.style.paddingTop = headerHeight();
-      } else {
-        header.classList.remove("sticky");
-        document.body.style.paddingTop = "0px";
-      }
-    });
-  }
+    if (window.scrollY > 0) {
+      header.classList.add("sticky");
+    } else {
+      header.classList.remove("sticky");
+    }
+  };
+
+  const header = document.getElementById("header");
+
+  addBlur(header);
+
+  window.addEventListener("scroll", () => {
+    addBlur(header);
+  });
 </script>
 
 <style>
   /* Base header styles */
   #header {
-    height: var(--header-height);
-    position: relative;
-  }
-
-  /* Sticky state */
-  #header.sticky {
-    position: fixed;
-    inset: 0 0 auto;
-    z-index: 100;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    position: sticky;
+    z-index: 200;
+    top: 0;
   }
 
   /* Blur background effect */
   .blur-background {
-    --blur-extend: 500px;
-    --blur-cutoff: calc(100% - var(--blur-extend));
-
     position: absolute;
     inset: 0;
-    bottom: calc(var(--blur-extend) * -1);
-
-    /* Gradient mask for fade out */
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      #000 0,
-      #000 var(--blur-cutoff),
-      transparent var(--blur-cutoff)
-    );
-    mask-image: linear-gradient(
-      to bottom,
-      #000 0,
-      #000 var(--blur-cutoff),
-      transparent var(--blur-cutoff)
-    );
+    z-index: 1;
 
     /* Blur effect */
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
-
     pointer-events: none;
     transition: opacity 0.3s;
   }

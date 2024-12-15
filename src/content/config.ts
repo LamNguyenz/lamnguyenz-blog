@@ -6,6 +6,7 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    tags: z.array(z.string()).optional(),
     // Transform string to Date object
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
@@ -13,14 +14,4 @@ const blog = defineCollection({
   }),
 });
 
-// Define a collection for tags
-const tags = defineCollection({
-  type: "data",
-  schema: z.object({
-    name: z.string(),
-    description: z.string().optional(),
-    color: z.string().optional(),
-  }),
-});
-
-export const collections = { blog, tags };
+export const collections = { blog };

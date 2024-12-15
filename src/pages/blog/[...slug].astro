@@ -12,9 +12,17 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 ---
 
 <Layout {...post.data}>
-  <Content />
+  <article class="prose prose-zinc prose-pre:overflow-hidden dark:prose-invert">
+    <Content />
+  </article>
 </Layout>
+
+<style>
+  .prose {
+    max-width: max-content;
+  }
+</style>

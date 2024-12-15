@@ -1,0 +1,19 @@
+---
+interface Props {
+  name: string;
+  href?: string;
+}
+
+const { name, href } = Astro.props;
+const Tag = href ? "a" : "div";
+---
+
+<Tag href={href} class="badge badge-md badge-outline text-base-content">
+  {name}
+</Tag>
+
+<style>
+  .badge {
+    width: fit-content;
+  }
+</style>
