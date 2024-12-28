@@ -2,12 +2,12 @@
   --base-font-size: 16px;
 
   /* FONT SCALE */
-  --font-size--2: clamp(0.72rem, 0.9476rem + -0.2937vw, 0.8889rem);
-  --font-size--1: clamp(0.9rem, 1.0348rem + -0.1739vw, 1rem);
-  --font-size-0: clamp(1.125rem, 1.125rem + 0vw, 1.125rem);
-  --font-size-1: clamp(1.2656rem, 1.2167rem + 0.2446vw, 1.4063rem);
-  --font-size-2: clamp(1.4238rem, 1.3077rem + 0.5808vw, 1.7578rem);
-  --font-size-3: clamp(1.6018rem, 1.3947rem + 1.0356vw, 2.1973rem);
+  --font-size--2: clamp(0.64rem, 0.8423rem + -0.2611vw, 0.7901rem);
+  --font-size--1: clamp(0.8rem, 0.9198rem + -0.1546vw, 0.8889rem);
+  --font-size-0: clamp(1rem, 1rem + 0vw, 1rem);
+  --font-size-1: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
+  --font-size-2: clamp(1.2656rem, 1.1624rem + 0.5163vw, 1.5625rem);
+  --font-size-3: clamp(1.4238rem, 1.2397rem + 0.9205vw, 1.9531rem);
 
   /* FONT FAMILY */
   --font: "Poppins";

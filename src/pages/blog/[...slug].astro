@@ -1,4 +1,7 @@
 ---
+import PageTitle from "@/components/PageTitle.astro";
+import { tocConfig } from "@/settings/config";
+import { generateToC } from "@/utils/generateToC";
 import { type CollectionEntry, getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 
@@ -13,10 +16,16 @@ type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
 const { Content, headings } = await post.render();
+
+const toc = {
+  ...tocConfig,
+  items: generateToC(headings, { ...tocConfig }),
+};
 ---
 
-<Layout {...post.data}>
+<Layout {...post.data} toc={toc}>
   <article class="prose prose-zinc prose-pre:overflow-hidden dark:prose-invert">
+    <PageTitle title={post.data.title} />
     <Content />
   </article>
 </Layout>

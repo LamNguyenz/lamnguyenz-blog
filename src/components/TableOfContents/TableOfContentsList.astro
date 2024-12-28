@@ -24,3 +24,27 @@ const { toc, isMobile = false, depth = 0 } = Astro.props;
     ))
   }
 </ul>
+
+<style define:vars={{ depth }}>
+  ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    --pad-inline: 0.5rem;
+    display: block;
+    border-radius: 0.25rem;
+    padding-block: 0.25rem;
+    padding-inline: calc(1rem * var(--depth) + var(--pad-inline)) var(--pad-inline);
+    line-height: 1.25;
+  }
+
+  a[aria-current="true"] {
+    color: var(--color-primary);
+  }
+
+  span {
+    font-size: inherit;
+  }
+</style>

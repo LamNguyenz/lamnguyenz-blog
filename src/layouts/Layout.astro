@@ -1,31 +1,44 @@
 ---
+import ContentLayout from "@/components/ContentLayout.astro";
 import GradientBackground from "@/components/GradientBackground.astro";
 import BaseHead from "@/components/layout/BaseHead.astro";
 import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
-import { generateToC } from "@/utils/generateToC";
-import type { MarkdownHeading } from "astro";
+import MobileTableOfContent from "@/components/MobileTableOfContent.astro";
+import PageFrame from "@/components/PageFrame.astro";
+import TableOfContents from "@/components/TableOfContents.astro";
+import type { TocItem } from "@/utils/generateToC";
 
 interface Props {
   title: string;
   description: string;
-  headings?: MarkdownHeading[];
+  toc?:
+    | { minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] }
+    | undefined;
 }
 
-const { title, description, headings } = Astro.props;
+const { title, description, toc } = Astro.props;
 ---
 
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} />
   </head>
-  <body class="min-h-screen grid grid-rows-[auto_1fr_auto]">
+  <body>
     <GradientBackground />
-    <Header />
-    <main class="content-container">
-      <slot />
-    </main>
-    <Footer />
+
+    <PageFrame>
+      <Header slot="header">
+        {toc && <MobileTableOfContent toc={toc} slot="mobile-toc" />}
+      </Header>
+      <ContentLayout slot="main">
+        {toc && <TableOfContents toc={toc} slot="right-sidebar" />}
+        <main>
+          <slot />
+        </main>
+      </ContentLayout>
+      <Footer slot="footer" />
+    </PageFrame>
   </body>
 </html>
 

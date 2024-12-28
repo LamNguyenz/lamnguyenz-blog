@@ -1,21 +1,6 @@
 ---
-import { generateToC } from "@/utils/generateToC";
 import TableOfContentsList from "./TableOfContents/TableOfContentsList.astro";
-
-const { headings } = Astro.props;
-
-const minHeadingLevel = 2;
-const maxHeadingLevel = 3;
-
-const toc = {
-  minHeadingLevel,
-  maxHeadingLevel,
-  items: generateToC(headings, {
-    minHeadingLevel,
-    maxHeadingLevel,
-    title: "overview",
-  }),
-};
+const { toc } = Astro.props;
 ---
 
 <custom-toc data-min-h={toc.minHeadingLevel} data-max-h={toc.maxHeadingLevel}>
@@ -24,3 +9,5 @@ const toc = {
     <TableOfContentsList toc={toc.items} />
   </nav>
 </custom-toc>
+
+<script src="./TableOfContents/custom-toc.ts"></script>

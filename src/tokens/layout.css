@@ -1,4 +1,11 @@
 :root {
-	--content-width: calc(65ch);
-	--header-height: 4rem;
+  /* Layout */
+  --content-width: min(42.875rem, 100vw - 4rem);
+  --header-height: 4rem;
+  --sidebar-width: 250px;
+  --sidebar-pad-x: 1rem;
+
+  /* Global z-index */
+  --z-index-toc: 4;
+  --z-index-header: 200;
 }
