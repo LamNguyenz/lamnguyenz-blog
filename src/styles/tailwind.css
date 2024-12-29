@@ -6,7 +6,7 @@
 
 @layer components {
   .content-container {
-    width: min(var(--content-width), 100vw - 4rem);
+    width: var(--content-width);
     margin-inline: auto;
   }
 }

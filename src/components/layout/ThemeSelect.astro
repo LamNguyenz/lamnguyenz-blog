@@ -71,31 +71,38 @@ const themes = [
 </script>
 
 <!-- Theme Init -->
-<style is:inline>
+<style is:inline data-astro-rerun>
   html {
     visibility: hidden;
   }
 </style>
 
-<script is:inline>
-  let storedConfig = localStorage.getItem("config");
-  const config = JSON.parse(storedConfig || "{}");
+<script is:inline data-astro-rerun>
+  const init = () => {
+    let storedConfig = localStorage.getItem("config");
+    const config = JSON.parse(storedConfig || "{}");
 
-  if (!config.theme) {
-    config.theme = window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  }
-
-  document.querySelectorAll("theme-select").forEach((picker) => {
-    const radio = picker.querySelector(
-      `input[name='theme-dropdown'][value="${config.theme}"]`
-    );
-    if (radio) {
-      radio.checked = true;
+    if (!config.theme) {
+      config.theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
     }
-  });
 
-  document.documentElement.dataset.theme = config.theme;
-  document.documentElement.style.visibility = "visible";
+    document.querySelectorAll("theme-select").forEach((picker) => {
+      const radio = picker.querySelector(
+        `input[name='theme-dropdown'][value="${config.theme}"]`
+      );
+      if (radio) {
+        radio.checked = true;
+      }
+    });
+
+    document.documentElement.dataset.theme = config.theme;
+    document.documentElement.style.visibility = "visible";
+  };
+
+  init();
+  document.addEventListener("astro:after-swap", () => {
+    init();
+  });
 </script>

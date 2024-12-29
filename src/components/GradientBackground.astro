@@ -1,37 +1,43 @@
 <div id="gradient-background"></div>
 
 <script>
-  const gradientBackground = document.getElementById("gradient-background");
+  const init = () => {
+    const gradientBackground = document.getElementById("gradient-background");
 
-  let currentX = 50;
-  let currentY = 50;
-  let targetX = 50;
-  let targetY = 50;
+    let currentX = 50;
+    let currentY = 50;
+    let targetX = 50;
+    let targetY = 50;
 
-  const lerp = (start: number, end: number, factor: number) => {
-    return start + (end - start) * factor;
+    const lerp = (start: number, end: number, factor: number) => {
+      return start + (end - start) * factor;
+    };
+
+    window.addEventListener("mousemove", (e) => {
+      if (!gradientBackground) return;
+
+      targetX = (e.clientX / window.innerWidth) * 100;
+      targetY = (e.clientY / window.innerHeight) * 100;
+    });
+
+    const animate = () => {
+      if (!gradientBackground) return;
+
+      currentX = lerp(currentX, targetX, 0.05);
+      currentY = lerp(currentY, targetY, 0.05);
+
+      gradientBackground.style.setProperty("--mouse-x", `${currentX}%`);
+      gradientBackground.style.setProperty("--mouse-y", `${currentY}%`);
+
+      requestAnimationFrame(animate);
+    };
+
+    animate();
   };
 
-  window.addEventListener("mousemove", (e) => {
-    if (!gradientBackground) return;
-
-    targetX = (e.clientX / window.innerWidth) * 100;
-    targetY = (e.clientY / window.innerHeight) * 100;
+  document.addEventListener("astro:page-load", () => {
+    init();
   });
-
-  const animate = () => {
-    if (!gradientBackground) return;
-
-    currentX = lerp(currentX, targetX, 0.05);
-    currentY = lerp(currentY, targetY, 0.05);
-
-    gradientBackground.style.setProperty("--mouse-x", `${currentX}%`);
-    gradientBackground.style.setProperty("--mouse-y", `${currentY}%`);
-
-    requestAnimationFrame(animate);
-  };
-
-  animate();
 </script>
 
 <style>

@@ -5,6 +5,10 @@
     lemonade, night, coffee, winter, dim, nord, sunset;
 }
 
+:where(:root) {
+  --color-primary: hsl(225, 100%, 64%);
+}
+
 [data-theme="dark"] {
   --color-primary: hsl(225, 100%, 64%);
   --color-secondary: hsl(333deg 100% 55%);

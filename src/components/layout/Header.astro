@@ -20,7 +20,13 @@ import ThemeSelect from "@/components/layout/ThemeSelect.astro";
         <ThemeSelect />
       </div>
     </nav>
-    <slot name="toc" />
+    {
+      Astro.slots.has("mobile-toc") && (
+        <div class="mobile-toc">
+          <slot name="mobile-toc" />
+        </div>
+      )
+    }
   </div>
 </header>
 
@@ -36,7 +42,6 @@ import ThemeSelect from "@/components/layout/ThemeSelect.astro";
   };
 
   const header = document.getElementById("header");
-
   addBlur(header);
 
   window.addEventListener("scroll", () => {
@@ -47,11 +52,24 @@ import ThemeSelect from "@/components/layout/ThemeSelect.astro";
 <style>
   /* Base header styles */
   #header {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
     position: sticky;
-    z-index: 200;
+    height: var(--header-height);
+    z-index: var(--z-index-header);
     top: 0;
+  }
+
+  .mobile-toc {
+    display: none;
+  }
+
+  @media screen and (max-width: 1240px) {
+    #header:has(.mobile-toc) {
+      --header-height: 5rem;
+    }
+
+    .mobile-toc {
+      display: block;
+    }
   }
 
   /* Blur background effect */
@@ -79,5 +97,11 @@ import ThemeSelect from "@/components/layout/ThemeSelect.astro";
   /* Hide blur when not sticky */
   #header:not(.sticky) .blur-background {
     opacity: 0;
+  }
+</style>
+
+<style is:global>
+  [id] {
+    scroll-margin-top: var(--header-height);
   }
 </style>

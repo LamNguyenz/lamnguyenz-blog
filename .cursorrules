@@ -123,4 +123,4 @@ Performance Metrics
 
 Refer to Astro's official documentation for detailed information on components, routing, and integrations for best practices.
 
-- Don't use the @apply directive in style astro
+- If you use @apply in style, please @import "tailwindcss/theme" in the style tag.

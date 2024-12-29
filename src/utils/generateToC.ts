@@ -1,5 +1,5 @@
 import type { MarkdownHeading } from "astro";
-import { PAGE_TITLE_ID } from "@/consts";
+import { PAGE_TITLE_ID } from "@/constants";
 
 export interface TocItem extends MarkdownHeading {
   children: TocItem[];

@@ -1,0 +1,17 @@
+---
+
+---
+
+<mobile-custom-toc> </mobile-custom-toc>
+
+<script>
+  import { CustomTOC } from "./TableOfContents/custom-toc";
+
+  class MobileCustomToc extends CustomTOC {
+    constructor() {
+      super();
+    }
+  }
+
+  customElements.define("mobile-custom-toc", MobileCustomToc);
+</script>
