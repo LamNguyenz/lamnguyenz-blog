@@ -8,6 +8,7 @@ import MobileTableOfContent from "@/components/MobileTableOfContent.astro";
 import PageFrame from "@/components/PageFrame.astro";
 import TableOfContents from "@/components/TableOfContents.astro";
 import type { TocItem } from "@/utils/generateToC";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title: string;
@@ -23,11 +24,11 @@ const { title, description, toc } = Astro.props;
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} />
+    <ClientRouter />
   </head>
   <body>
     <GradientBackground />
-
-    <PageFrame>
+    <PageFrame transition:animate="none">
       <Header slot="header">
         {toc && <MobileTableOfContent toc={toc} slot="mobile-toc" />}
       </Header>

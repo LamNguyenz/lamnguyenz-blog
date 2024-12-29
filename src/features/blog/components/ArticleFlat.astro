@@ -19,12 +19,12 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
 <article class="prose-sm cursor-pointer flex">
   <div class="flex-auto">
     <h3 class="not-prose text-primary">{title}</h3>
-    <p class="text-sm not-prose">{formattedDate}</p>
-    <p>{description}</p>
+    <p class="text-xs not-prose text-neutral-400">{formattedDate}</p>
+    <p class="mb-0">{description}</p>
   </div>
   {
     heroImage && (
-      <div class="p-4 shrink-0 flex items-center justify-center">
+      <div class="px-4 shrink-0 flex items-center justify-center">
         <figure class="not-prose">
           <Image
             class="rounded-xl"
