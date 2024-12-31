@@ -23,12 +23,18 @@ importers:
       astro:
         specifier: ^5.1.0
         version: 5.1.1(jiti@2.4.0)(lightningcss@1.28.1)(rollup@4.27.3)(typescript@5.6.3)(yaml@2.6.1)
+      astro-loading-indicator:
+        specifier: ^0.7.0
+        version: 0.7.0(astro@5.1.1(jiti@2.4.0)(lightningcss@1.28.1)(rollup@4.27.3)(typescript@5.6.3)(yaml@2.6.1))
       nanostores:
         specifier: ^0.11.3
         version: 0.11.3
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
     devDependencies:
       '@tailwindcss/typography':
         specifier: ^0.5.15
@@ -905,6 +911,11 @@ packages:
     resolution: {integrity: sha512-LElXdjswlqjWrPpJFg1Fx4wpkOCxj1TDHlSV4PlaRxHGWko024xICaa97ZkMfs6DRKlCguiAI+rbXv5GWwXIkg==}
     hasBin: true
 
+  astro-loading-indicator@0.7.0:
+    resolution: {integrity: sha512-oNSUYbHq8Aaol0zcVuBzGz+qrqKsviOvKl1xaaKo3DLkEef7HCzHQAgTgWv4lB1iYFWa5GaieQvlxBO4KjzKZg==}
+    peerDependencies:
+      astro: ^4.0.0 || ^5.0.0
+
   astro@5.1.1:
     resolution: {integrity: sha512-prpWC2PRs4P3FKQg6gZaU+VNMqbZi5pDvORGB2nrjfRjkrvF6/l4BqhvkJ6YQ0Ohm5rIMVz8ljgaRI77mLHbwg==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
@@ -1461,9 +1472,6 @@ packages:
 
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
-
-  magic-string@0.30.13:
-    resolution: {integrity: sha512-8rYBO+MsWkgjDSOvLomYnzhdwEG51olQ4zL5KXnNJWV5MNmrb4rTZdrtkhxjnD/QyZUqR/Z/XDsUs/4ej2nx0g==}
 
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
@@ -3186,6 +3194,10 @@ snapshots:
 
   astring@1.9.0: {}
 
+  astro-loading-indicator@0.7.0(astro@5.1.1(jiti@2.4.0)(lightningcss@1.28.1)(rollup@4.27.3)(typescript@5.6.3)(yaml@2.6.1)):
+    dependencies:
+      astro: 5.1.1(jiti@2.4.0)(lightningcss@1.28.1)(rollup@4.27.3)(typescript@5.6.3)(yaml@2.6.1)
+
   astro@5.1.1(jiti@2.4.0)(lightningcss@1.28.1)(rollup@4.27.3)(typescript@5.6.3)(yaml@2.6.1):
     dependencies:
       '@astrojs/compiler': 2.10.3
@@ -3903,10 +3915,6 @@ snapshots:
   longest-streak@3.1.0: {}
 
   lru-cache@10.4.3: {}
-
-  magic-string@0.30.13:
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.5.0
 
   magic-string@0.30.17:
     dependencies:
@@ -4807,7 +4815,7 @@ snapshots:
       esrap: 1.2.2
       is-reference: 3.0.3
       locate-character: 3.0.0
-      magic-string: 0.30.13
+      magic-string: 0.30.17
       zimmerframe: 1.1.2
 
   tailwindcss@4.0.0-beta.2: {}

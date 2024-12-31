@@ -3,11 +3,20 @@ import TableOfContentsList from "./TableOfContents/TableOfContentsList.astro";
 const { toc } = Astro.props;
 ---
 
-<custom-toc transition:animate="slide" data-min-h={toc.minHeadingLevel} data-max-h={toc.maxHeadingLevel}>
+<custom-toc
+  transition:animate="slide"
+  data-min-h={toc.minHeadingLevel}
+  data-max-h={toc.maxHeadingLevel}>
   <nav aria-labelledby="toc__on-this-page">
     <h2 id="toc__on-this-page">On this page</h2>
     <TableOfContentsList toc={toc.items} />
   </nav>
 </custom-toc>
+
+<style>
+  #toc__on-this-page {
+    color: var(--color-neutral-400);
+  }
+</style>
 
 <script src="./TableOfContents/custom-toc.ts"></script>

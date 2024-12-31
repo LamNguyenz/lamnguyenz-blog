@@ -10,8 +10,8 @@ const posts = (await getCollection("blog")).sort(
 <div class="flex flex-col divide-y divide-base-content/20">
   {
     posts.map((post) => (
-      <div class="prose-a:no-underline py-4">
-        <a class="link" href={`/blog/${post.slug}`}>
+      <div class="prose-a:no-underline first:pt-0 last:pb-0 py-4">
+        <a class="link" href={`/blog/${post.slug}`} data-astro-prefetch>
           <ArticleFlat post={post} />
         </a>
       </div>

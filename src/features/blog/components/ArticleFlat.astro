@@ -16,11 +16,11 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
 });
 ---
 
-<article class="prose-sm cursor-pointer flex">
+<article class="prose-sm prose-p:prose cursor-pointer flex dark:prose-invert">
   <div class="flex-auto">
     <h3 class="not-prose text-primary">{title}</h3>
-    <p class="text-xs not-prose text-neutral-400">{formattedDate}</p>
-    <p class="mb-0">{description}</p>
+    <p class="mb-2 not-prose text-neutral-400 not-dark:text-neutral-600">{formattedDate}</p>
+    <p class="mt-0 mb-0">{description}</p>
   </div>
   {
     heroImage && (
@@ -30,9 +30,9 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
             class="rounded-xl"
             width={100}
             height={100}
-            src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
+            src={heroImage}
             alt="Movie"
-            loading="eager"
+            loading="lazy"
           />
         </figure>
       </div>
@@ -41,15 +41,7 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
 </article>
 
 <style>
-  .card-body {
-    padding: calc(var(--spacing) * 4);
-  }
-
   figure {
     width: clamp(40px, calc(100vw / 320 * 40), 60px);
-  }
-
-  p {
-    font-size: 0.875rem;
   }
 </style>

@@ -1,5 +1,4 @@
 ---
-import PageTitle from "@/components/PageTitle.astro";
 import { tocConfig } from "@/settings/config";
 import { generateToC } from "@/utils/generateToC";
 import { type CollectionEntry, getCollection } from "astro:content";
@@ -24,8 +23,8 @@ const toc = {
 ---
 
 <Layout {...post.data} toc={toc}>
-  <article class="prose prose-zinc prose-pre:overflow-hidden dark:prose-invert">
-    <PageTitle title={post.data.title} />
+  <article
+    class="prose prose-zinc prose-h2:text-primary prose-h3:text-secondary prose-pre:overflow-hidden dark:prose-invert">
     <Content />
   </article>
 </Layout>

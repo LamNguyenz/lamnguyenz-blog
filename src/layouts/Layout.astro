@@ -9,6 +9,7 @@ import PageFrame from "@/components/PageFrame.astro";
 import TableOfContents from "@/components/TableOfContents.astro";
 import type { TocItem } from "@/utils/generateToC";
 import { ClientRouter } from "astro:transitions";
+import LoadingIndicator from "astro-loading-indicator/component";
 
 interface Props {
   title: string;
@@ -25,6 +26,7 @@ const { title, description, toc } = Astro.props;
   <head>
     <BaseHead title={title} description={description} />
     <ClientRouter />
+    <LoadingIndicator color="hsl(225, 100%, 64%)" />
   </head>
   <body>
     <GradientBackground />
