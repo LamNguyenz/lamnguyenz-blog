@@ -7,6 +7,7 @@ import { defineConfig } from "astro/config";
 import svelte from "@astrojs/svelte";
 
 import expressiveCode from "astro-expressive-code";
+import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,8 +22,9 @@ export default defineConfig({
       styleOverrides: {
         frames: {
           shadowColor: "transparent",
-        }
-      }
+        },
+      },
+      plugins: [pluginCollapsibleSections()],
     }),
     mdx(),
     sitemap(),

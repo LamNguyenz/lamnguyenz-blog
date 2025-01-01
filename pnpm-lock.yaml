@@ -23,6 +23,9 @@ importers:
       '@astrojs/svelte':
         specifier: ^7.0.2
         version: 7.0.2(astro@5.1.1(jiti@2.4.0)(lightningcss@1.28.1)(rollup@4.27.3)(typescript@5.7.2)(yaml@2.6.1))(jiti@2.4.0)(lightningcss@1.28.1)(svelte@5.16.0)(typescript@5.7.2)(yaml@2.6.1)
+      '@expressive-code/plugin-collapsible-sections':
+        specifier: ^0.38.3
+        version: 0.38.3
       astro:
         specifier: ^5.1.0
         version: 5.1.1(jiti@2.4.0)(lightningcss@1.28.1)(rollup@4.27.3)(typescript@5.7.2)(yaml@2.6.1)
@@ -519,6 +522,9 @@ packages:
 
   '@expressive-code/core@0.38.3':
     resolution: {integrity: sha512-s0/OtdRpBONwcn23O8nVwDNQqpBGKscysejkeBkwlIeHRLZWgiTVrusT5Idrdz1d8cW5wRk9iGsAIQmwDPXgJg==}
+
+  '@expressive-code/plugin-collapsible-sections@0.38.3':
+    resolution: {integrity: sha512-0r1k4k5S7GBLIRBYFkMKeIyD9iYcwM+LBrwoxZtd9TtBYJ3ziWBleFlCoOA3fo/Mj2YcaN7ZRIscMzYY9JBWrA==}
 
   '@expressive-code/plugin-frames@0.38.3':
     resolution: {integrity: sha512-qL2oC6FplmHNQfZ8ZkTR64/wKo9x0c8uP2WDftR/ydwN/yhe1ed7ZWYb8r3dezxsls+tDokCnN4zYR594jbpvg==}
@@ -3119,6 +3125,10 @@ snapshots:
       postcss-nested: 6.2.0(postcss@8.4.49)
       unist-util-visit: 5.0.0
       unist-util-visit-parents: 6.0.1
+
+  '@expressive-code/plugin-collapsible-sections@0.38.3':
+    dependencies:
+      '@expressive-code/core': 0.38.3
 
   '@expressive-code/plugin-frames@0.38.3':
     dependencies:
