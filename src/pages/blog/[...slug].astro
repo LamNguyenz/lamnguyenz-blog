@@ -1,8 +1,8 @@
 ---
-import PageTitle from "@/components/PageTitle.astro";
 import { tocConfig } from "@/settings/config";
 import { generateToC } from "@/utils/generateToC";
 import { type CollectionEntry, getCollection } from "astro:content";
+import BlogTitle from "@/components/BlogTitle.astro";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -24,8 +24,9 @@ const toc = {
 ---
 
 <Layout {...post.data} toc={toc}>
-  <article class="prose prose-zinc prose-pre:overflow-hidden dark:prose-invert">
-    <PageTitle title={post.data.title} />
+  <article
+    class="prose prose-zinc prose-code:before:hidden prose-code:after:hidden prose-h2:text-primary prose-h3:text-secondary prose-pre:overflow-hidden dark:prose-invert">
+    <BlogTitle {...post.data} />
     <Content />
   </article>
 </Layout>

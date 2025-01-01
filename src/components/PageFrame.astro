@@ -3,6 +3,14 @@
 
 <div class="page-frame">
   <slot name="header" />
-  <slot name="main" />
+  <slot class="page-frame__main" name="main" />
   <slot name="footer" />
 </div>
+
+<style>
+  .page-frame {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+  }
+</style>

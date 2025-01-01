@@ -1,0 +1,100 @@
+---
+title: "Toggle - but with accessibility"
+description: "Since nowaday, making a toggle is easy with React, but how about making a toggle with HTML and CSS with accessibility?"
+pubDate: "2024-12-31"
+tags: ["CSS"]
+---
+
+Nearly after trying to do some advent of CSS 2024 while making the toggle from scratch with HTML and CSS, I see that I have missed a thing that is important that a frontend engineer needs to focus on - Accessibility.
+
+## Rethink about accessibility
+
+For a long time, working as a React - Next JS developer, which a bunch of libraries like Ant Design, Material Design, Shadcn… I can build fancy components that have a lot of animation, state updates, and logic handling in the React ways. I feel like now I am the big guy; I can control, I can master frontend now. Until I start to make [the advent of CSS 2024](https://store.selfteach.me/view/courses/advent-of-css-2024)
+
+Everything collapsed when I figured out that I was not as easy as I thought. A toggle, aha, easy peasy, I can do that with state change and then update UI with re…. wait a minute. How can I do that in HTML and CSS only? For the first time, it looks like this.
+
+```html
+<div class="switch">
+  <input type="checkbox" />
+  <div class="slider">
+	<div class="slider__thumb"></div>
+  </div>
+</div>
+<style>
+	input {
+		appearance: none;
+	}
+	/* input check css ... */
+</style>
+```
+
+Looks not bad. It’s work. Then, I referenced another solution. And it looks like this:
+
+```html
+<label class="switch" for="uniqueID">
+  <input type="checkbox" id="uniqueID" />
+  <span class="slider">
+	<span class="slider__thumb"></span>
+  </span>
+  The toggle label
+</label>
+<style>
+	input {
+		clip: rect(0 0 0 0);
+	    clip-path: inset(50%);
+	    height: 1px;
+	    position: absolute;
+	    left: -9999px;
+	}
+	/* input check css ... */
+</style>
+```
+
+Why is the structure so different? Oh, here we come with the accessibility.
+
+## Accessibility for tag
+
+### label - the form control accessibility
+When only using div, I figured out that if I use only div, I can not handle clicking the title of that checkbox by using only CSS. Must use JS to handle `click` event to change the state for input. For the definition of mdn web doc:
+
+> Associating a `<label>` with a form control, such as [`<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) or [`<textarea>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea) offers some major advantages:
+>  - The label text is not only visually associated with its corresponding text input; it is programmatically associated with it, too. This means that, for example, a screen reader will read out the label when the user is focused on the form input, making it easier for an assistive technology user to understand what data should be entered.
+>  - When a user clicks or touches/taps a label, the browser passes the focus to its associated input (the resulting event is also raised for the input). That increased hit area for focusing the input provides an advantage to anyone trying to activate it — including those using a touch-screen device.
+
+So that it helps us to trigger the input inside. Helping increase the UX for a small element to click.
+
+> And don’t forget 2 things when using label:
+> - The `id` for the input that trigger focus
+> - The content of the label
+
+We have done with the accessibility, but how about the input?
+
+### appearance - the important aspect of a screen reader
+
+We need to hide the current input to show our custom element css for the toggle. We have some ways to hide:
+- Display: none;
+- Visibility: hidden;
+- Appearance: none;
+That came to my mind when I first wanted to hide something. But they come with some disadvantages: 
+- Display: none: The element is not visible in the DOM, the screen reader can not read it.
+- Visibility: hidden: It keeps the DOM, but also keeps all the sizing of the element that causes a blank space in the UI.
+- Appearance: none: It keeps the DOM, visible to a screen reader, and removes the style. But the DOM element still takes place there. You will see it when use flex, it will count that input DOM.
+
+That’s why we came to the final solution:
+```css
+input {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	position: absolute;
+	left: -9999px;
+}
+```
+In this way, we can hide the input element, still keep the DOM, and not affect the parent element layout.
+
+And for the rest. We can style the toggle as long as we like. 
+
+Cheers,
+## References
+- [Accessibility toggle code pen](https://codepen.io/xirclebox/pen/wvGmjbV)
+- [Label mdn web docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label)

@@ -1,0 +1,14 @@
+---
+import { PAGE_TITLE_ID } from "@/constants";
+import { formatDate } from "@/utils/date";
+import type { CollectionEntry } from "astro:content";
+
+type Props = CollectionEntry<"blog">["data"];
+const post = Astro.props;
+const formattedDate = formatDate(post.pubDate);
+---
+
+<>
+  <h1 class="mb-2" id={PAGE_TITLE_ID}>{post.title}</h1>
+  <p class="mt-0 text-sm text-neutral-400 not-dark:text-neutral-600">{formattedDate}</p>
+</>

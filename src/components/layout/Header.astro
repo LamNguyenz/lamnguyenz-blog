@@ -31,7 +31,8 @@ import ThemeSelect from "@/components/layout/ThemeSelect.astro";
 </header>
 
 <script>
-  const addBlur = (header: HTMLElement | null) => {
+  const addBlur = () => {
+    const header = document.getElementById("header");
     if (!header) return;
 
     if (window.scrollY > 0) {
@@ -41,11 +42,17 @@ import ThemeSelect from "@/components/layout/ThemeSelect.astro";
     }
   };
 
-  const header = document.getElementById("header");
-  addBlur(header);
+  addBlur();
 
   window.addEventListener("scroll", () => {
-    addBlur(header);
+    addBlur();
+  });
+
+  document.addEventListener("astro:page-load", () => {
+    addBlur();
+    window.addEventListener("scroll", () => {
+      addBlur();
+    });
   });
 </script>
 
@@ -82,7 +89,7 @@ import ThemeSelect from "@/components/layout/ThemeSelect.astro";
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     pointer-events: none;
-    transition: opacity 0.3s;
+    transition: opacity 0.15s;
   }
 
   /* Background overlay */

@@ -28,7 +28,6 @@ export const initializeStore = () => {
 
   // Save to localStorage when updated
   configStore.listen((value) => {
-    console.log("configStore change: ", value);
     typeof localStorage !== "undefined" &&
       localStorage.setItem("config", JSON.stringify(value));
   });
