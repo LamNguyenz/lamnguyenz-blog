@@ -1,9 +1,12 @@
 // @ts-check
-import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
-import addIdToH1Heading from "./src/utils/addIdToH1Heading";
+import { defineConfig } from "astro/config";
+
+import svelte from "@astrojs/svelte";
+
+import expressiveCode from "astro-expressive-code";
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,15 +14,19 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  markdown: {
-    remarkPlugins: [addIdToH1Heading],
-  },
+  markdown: {},
   integrations: [
-    mdx({
-      syntaxHighlight: "shiki",
-      remarkPlugins: [addIdToH1Heading],
+    expressiveCode({
+      themes: ["dracula"],
+      styleOverrides: {
+        frames: {
+          shadowColor: "transparent",
+        }
+      }
     }),
+    mdx(),
     sitemap(),
+    svelte(),
   ],
   scopedStyleStrategy: "where",
   prefetch: true,
