@@ -27,7 +27,7 @@
       {#key photo}
         <div transition:fade={{ duration: 300 }} class="image">
           <img
-            loading="lazy"
+            loading="eager"
             decoding="async"
             src={photo}
             alt={`${photo.split("/").pop()}`}

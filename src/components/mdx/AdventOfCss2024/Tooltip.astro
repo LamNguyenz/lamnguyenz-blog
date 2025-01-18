@@ -1,0 +1,116 @@
+---
+interface Props {
+  position?: "top" | "right" | "bottom" | "left";
+}
+
+const { position = "top" }: Props = Astro.props;
+---
+
+<div class="tooltipz" data-position={position}>
+  <div class="tooltipz__content">My Text</div>
+  <slot />
+</div>
+
+<style>
+  :root {
+    --arrow-height: 8px;
+    --arrow-space: calc(var(--arrow-height) + 4px);
+    --arrow-side-length: calc(var(--arrow-height) * 0.866);
+    --z-index-tooltip: 10;
+    --bg-tooltip: var(--color-base-content);
+  }
+
+  .tooltipz {
+    display: inline-block;
+    position: relative;
+  }
+
+  .tooltipz__content {
+    position: absolute;
+    background-color: var(--bg-tooltip);
+    color: var(--color-base-100);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    z-index: var(--z-index-tooltip);
+    opacity: 0;
+    visibility: hidden;
+    white-space: nowrap;
+    text-align: center;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .tooltipz:hover .tooltipz__content,
+  .tooltipz:focus .tooltipz__content {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .tooltipz__content::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    z-index: var(--z-index-tooltip);
+  }
+
+  /* Top */
+  .tooltipz[data-position="top"] .tooltipz__content {
+    bottom: calc(100% + var(--arrow-space));
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .tooltipz[data-position="top"] .tooltipz__content::before {
+    top: 100%;
+    left: 50%;
+    border-top: var(--arrow-height) solid var(--bg-tooltip);
+    border-right: var(--arrow-side-length) solid transparent;
+    border-left: var(--arrow-side-length) solid transparent;
+    transform: translateX(-50%);
+  }
+
+  /* Right */
+  .tooltipz[data-position="right"] .tooltipz__content {
+    bottom: 50%;
+    left: calc(100% + var(--arrow-space));
+    transform: translateY(50%);
+  }
+  .tooltipz[data-position="right"] .tooltipz__content::before {
+    right: 100%;
+    top: 50%;
+    border-top: var(--arrow-side-length) solid transparent;
+    border-bottom: var(--arrow-side-length) solid transparent;
+    border-right: var(--arrow-height) solid var(--bg-tooltip);
+    transform: translateY(-50%);
+  }
+
+  /* Bottom */
+  .tooltipz[data-position="bottom"] .tooltipz__content {
+    top: calc(100% + var(--arrow-space));
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .tooltipz[data-position="bottom"] .tooltipz__content::before {
+    bottom: 100%;
+    left: 50%;
+    border-left: var(--arrow-side-length) solid transparent;
+    border-right: var(--arrow-side-length) solid transparent;
+    border-bottom: var(--arrow-height) solid var(--bg-tooltip);
+    transform: translateX(-50%);
+  }
+
+  /* Left */
+  .tooltipz[data-position="left"] .tooltipz__content {
+    top: 50%;
+    right: calc(100% + var(--arrow-space));
+    transform: translateY(-50%);
+  }
+  .tooltipz[data-position="left"] .tooltipz__content::before {
+    left: 100%;
+    top: 50%;
+    border-top: var(--arrow-side-length) solid transparent;
+    border-bottom: var(--arrow-side-length) solid transparent;
+    border-left: var(--arrow-height) solid var(--bg-tooltip);
+    transform: translateY(-50%);
+  }
+</style>

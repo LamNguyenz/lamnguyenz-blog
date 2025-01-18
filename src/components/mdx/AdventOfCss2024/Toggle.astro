@@ -1,0 +1,102 @@
+<label class="switch" for="uniqueID">
+  <input type="checkbox" id="uniqueID" />
+  <span class="switch-track">
+    <span class="switch-indicator">
+      <span class="checkmark">
+        <svg viewBox="0 0 61 45" xmlns="http://www.w3.org/2000/svg">
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M48.7498 2.28142C51.3913 -0.359957 55.6739 -0.359921 58.3153 2.28153C60.7556 4.72181 60.9404 8.55699 58.8749 11.2134L58.8041 11.3044L58.3963 11.7663L27.5701 42.5925C25.1298 45.0327 21.2946 45.2175 18.6382 43.152L18.5472 43.0812L18.0853 42.6734L2.63175 27.2198C-0.00973761 24.5784 -0.00973773 20.2957 2.63175 17.6542C5.07203 15.2139 8.9072 15.0291 11.5636 17.0946L11.6546 17.1654L12.1164 17.5731L22.7871 28.2419L48.7498 2.28142C48.7498 2.28138 48.7497 2.28146 48.7498 2.28142Z"
+          ></path>
+        </svg>
+      </span>
+    </span>
+  </span>
+  Toggle Label
+</label>
+
+<style>
+  .switch {
+    --thumb-size: 48px;
+    --checkmark-size: calc(var(--thumb-size) * 0.6);
+    --padding: 6px;
+    --track-width: 120px;
+    --track-height: calc(var(--thumb-size) + 2 * var(--padding));
+    --track-background: #7d7d7d;
+  }
+
+  .switch {
+    display: flex;
+    align-items: center;
+    border-radius: 100px;
+    position: relative;
+  }
+
+  input {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    position: absolute;
+    left: -9999px;
+    white-space: nowrap;
+
+    &:not([disabled]):active + .switch-track,
+    &:not([disabled]):focus + .switch-track {
+      outline: 2px solid #000;
+    }
+    &:disabled + .switch-track {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+  }
+
+  .switch-track {
+    display: flex;
+    padding: var(--padding);
+    width: var(--track-width);
+    height: var(--track-height);
+    border-radius: 100px;
+    cursor: pointer;
+    position: relative;
+    background-color: var(--track-background);
+    transition: 0.3s ease-in-out;
+    margin-right: 12px;
+  }
+
+  .switch-indicator {
+    display: flex;
+    width: var(--thumb-size);
+    height: var(--thumb-size);
+    background-color: #000;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease-in-out;
+  }
+
+  input:checked + .switch-track {
+    background-color: #00ff94;
+    transition: 0.3s ease-in-out;
+  }
+
+  input:checked + .switch-track .switch-indicator {
+    transform: translateX(calc(var(--track-width) - var(--track-height)));
+
+    .checkmark {
+      opacity: 1;
+      transition: opacity 0.2s ease-in-out;
+    }
+  }
+
+  .checkmark {
+    display: inline-flex;
+    transition: opacity $speed ease-in-out;
+    width: calc(var(--thumb-size) - 16px);
+    height: calc(var(--thumb-size) - 16px);
+    fill: #00ff94;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+</style>
