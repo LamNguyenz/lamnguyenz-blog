@@ -1,0 +1,182 @@
+---
+title: "Advent of CSS 2024 - Day 3 - Tooltip"
+description: "Today, we will build an CSS only tooltip"
+pubDate: "2025-01-11"
+tags: ["Advent of CSS"]
+---
+
+import Tooltip from "@/components/mdx/AdventOfCss2024/Tooltip.astro"
+
+Welcome to the 3rd day of Advent of CSS 2024.
+Today we will build a tooltip with arrow.
+
+## Introduction
+We will build a tooltip with this requirement:
+- When you hover over the text, the tooltip should appear.
+- When you roll off the text, the tooltip should disappear.
+- There are no additional project files today. Everything, including the arrow should be created with CSS.
+
+![Tooltip](/blog/advent-of-css-2024/day-3/tooltip.png)
+
+## Coding
+
+### Build the structure
+
+For the HTML we only need to create a `Tooltip` component and pass the `position` prop to it.
+We can use the `data-position` attribute to set the position of the tooltip.
+
+```html
+<div class="tooltipz" data-position="top">
+  <div class="tooltipz__content">Tooltip text</div>
+	My Text
+</div>
+```
+
+### Result
+<div class="flex flex-col items-center gap-2">
+	<Tooltip position="top">
+		<div class="not-prose btn w-40">
+			Top tooltip
+		</div>
+	</Tooltip>
+	<Tooltip position="right">
+		<div class="not-prose btn w-40">
+			Right tooltip
+		</div>
+	</Tooltip>
+	<Tooltip position="bottom">
+		<div class="not-prose btn w-40">
+			Bottom tooltip
+		</div>
+	</Tooltip>
+	<Tooltip position="left">
+		<div class="not-prose btn w-40">
+			Left tooltip
+		</div>
+	</Tooltip>
+</div>
+
+Full source code:
+```astro title="Tooltip.astro" collapse={1-116}
+---
+interface Props {
+  position?: "top" | "right" | "bottom" | "left";
+}
+
+const { position = "top" }: Props = Astro.props;
+---
+
+<div class="tooltipz" data-position={position}>
+  <div class="tooltipz__content">My Text</div>
+  <slot />
+</div>
+
+<style>
+  :root {
+    --arrow-height: 8px;
+    --arrow-space: calc(var(--arrow-height) + 4px);
+    --arrow-side-length: calc(var(--arrow-height) * 0.866);
+    --z-index-tooltip: 10;
+    --bg-tooltip: var(--color-base-content);
+  }
+
+  .tooltipz {
+    display: inline-block;
+    position: relative;
+  }
+
+  .tooltipz__content {
+    position: absolute;
+    background-color: var(--bg-tooltip);
+    color: var(--color-base-100);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    z-index: var(--z-index-tooltip);
+    opacity: 0;
+    visibility: hidden;
+    white-space: nowrap;
+    text-align: center;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .tooltipz:hover .tooltipz__content,
+  .tooltipz:focus .tooltipz__content {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .tooltipz__content::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    z-index: var(--z-index-tooltip);
+  }
+
+  /* Top */
+  .tooltipz[data-position="top"] .tooltipz__content {
+    bottom: calc(100% + var(--arrow-space));
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .tooltipz[data-position="top"] .tooltipz__content::before {
+    top: 100%;
+    left: 50%;
+    border-top: var(--arrow-height) solid var(--bg-tooltip);
+    border-right: var(--arrow-side-length) solid transparent;
+    border-left: var(--arrow-side-length) solid transparent;
+    transform: translateX(-50%);
+  }
+
+  /* Right */
+  .tooltipz[data-position="right"] .tooltipz__content {
+    bottom: 50%;
+    left: calc(100% + var(--arrow-space));
+    transform: translateY(50%);
+  }
+  .tooltipz[data-position="right"] .tooltipz__content::before {
+    right: 100%;
+    top: 50%;
+    border-top: var(--arrow-side-length) solid transparent;
+    border-bottom: var(--arrow-side-length) solid transparent;
+    border-right: var(--arrow-height) solid var(--bg-tooltip);
+    transform: translateY(-50%);
+  }
+
+  /* Bottom */
+  .tooltipz[data-position="bottom"] .tooltipz__content {
+    top: calc(100% + var(--arrow-space));
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .tooltipz[data-position="bottom"] .tooltipz__content::before {
+    bottom: 100%;
+    left: 50%;
+    border-left: var(--arrow-side-length) solid transparent;
+    border-right: var(--arrow-side-length) solid transparent;
+    border-bottom: var(--arrow-height) solid var(--bg-tooltip);
+    transform: translateX(-50%);
+  }
+
+  /* Left */
+  .tooltipz[data-position="left"] .tooltipz__content {
+    top: 50%;
+    right: calc(100% + var(--arrow-space));
+    transform: translateY(-50%);
+  }
+  .tooltipz[data-position="left"] .tooltipz__content::before {
+    left: 100%;
+    top: 50%;
+    border-top: var(--arrow-side-length) solid transparent;
+    border-bottom: var(--arrow-side-length) solid transparent;
+    border-left: var(--arrow-height) solid var(--bg-tooltip);
+    transform: translateY(-50%);
+  }
+</style>
+
+```
+
+
+## References
+- [Advent of CSS 2024 - Day 3](https://store.selfteach.me/view/courses/advent-of-css-2024/2875667-challenge-3-tooltip-with-arrow/9312350-challenge-3)
